@@ -2,6 +2,7 @@ import { Car, CarFront, HomeIcon, Wrench } from 'lucide-react';
 import { Separator } from './ui/separator';
 import { ThemeToggle } from './theme/theme-toggle';
 import { AccountMenu } from './account-menu';
+import { NavLink } from 'react-router';
 
 export function Header() {
   return (
@@ -15,21 +16,20 @@ export function Header() {
 
           <nav className='flex items-center space-x-8 lg:space-x-10'>
 
-            <div className='flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground'>
-              <HomeIcon className='h-4 w-4' />
-              Início
-            </div>
+            <NavLink to="/" className='flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground'>
+                <HomeIcon className='h-4 w-4' />
+                Início
+              </NavLink>
 
-            <div className='flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground'>
-              <Car className='h-4 w-4' />
-              Meus Veículos
-            </div>
+            <NavLink to="/vehicles" className='flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground'>
+                <Car className='h-4 w-4' />
+                Meus Veículos
+            </NavLink>
 
-            <div className='flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground'>
-              <Wrench className='h-4 w-4' />
-              Manutenções
-            </div>
-            
+            <NavLink to="/maintenance" className='flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground'>
+                <Wrench className='h-4 w-4' />
+                Manutenções
+            </NavLink>            
           </nav>
 
         </div>

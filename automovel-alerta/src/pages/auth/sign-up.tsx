@@ -1,15 +1,15 @@
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link } from "lucide-react";
 
 export function SignUp() {
   return (
     <>
-       <div className='p-8'>
-          <Button variant='outline' className='absolute right-8 top-8'>
-             <Link to='/sign-in'>Fazer Login</Link>
-          </Button>
+       <div className='flex min-h-screen items-center justify-center p-8'>
+         <div className='absolute right-8 top-8'>
+          <ThemeToggle />
+         </div>
 
           <div className='w-[350px] flex flex-col justify-center gap-6'>
              <div className='flex flex-col gap-2 text-center'>
