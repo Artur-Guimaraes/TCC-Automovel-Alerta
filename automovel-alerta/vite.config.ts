@@ -10,6 +10,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  base: "/TCC-Automovel-Alerta/",
   build: {
     outDir: "build",
   },
