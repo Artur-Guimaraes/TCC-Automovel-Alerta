@@ -37,7 +37,7 @@ export function AccountMenu() {
                <DialogTrigger asChild>
                   <DropdownMenuItem>
                      <Building className="mr-2 h-4 w-4" />
-                     <span>Perfil da loja</span>
+                     <span>Perfil</span>
                   </DropdownMenuItem>
                </DialogTrigger>
                <DropdownMenuItem asChild className="text-rose-500 dark:text-rose-400">

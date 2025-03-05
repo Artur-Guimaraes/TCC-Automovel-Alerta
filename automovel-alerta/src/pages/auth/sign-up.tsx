@@ -13,13 +13,13 @@ export function SignUp() {
 
           <div className='w-[350px] flex flex-col justify-center gap-6'>
              <div className='flex flex-col gap-2 text-center'>
-                <h1 className='text-2xl font-semibold tracking-tight'>Criar conta grátis</h1>
-                <p className='text-sm text-muted-foreground'>Seja um parceiro e comece suas vendas!</p>
+                <h1 className='text-2xl font-semibold tracking-tight'>Criar conta</h1>
+                <p className='text-sm text-muted-foreground'>Tenha as manutenções do seu veículo sob controle!</p>
              </div>
 
              <form className='space-y-4' >
                 <div className='space-y-2'>
-                   <Label htmlFor='email'>Nome do Estabelecimento</Label>
+                   <Label htmlFor='email'>Usuário</Label>
                    <Input
                       id='restaurantName'
                       type='text'

@@ -57,25 +57,24 @@ export function Maintenance() {
     }
   };
 
-  const filteredMaintenances = maintenances.filter((m) => m.vehicleId === selectedVehicle);
-  const mileageData = filteredMaintenances.map((m) => ({
-    date: format(new Date(m.date), "dd/MM"),
-    mileage: m.mileage,
+  const filteredMaintenances = maintenances.filter((maintenance) => maintenance.vehicleId === selectedVehicle);
+  const mileageData = filteredMaintenances.map((maintenance) => ({
+    date: format(new Date(maintenance.date), "dd/MM"),
+    mileage: maintenance.mileage,
   }));
 
   // Definição de cores baseadas no tema
   const isDarkMode = theme === "dark";
-  const axisColor = isDarkMode ? "#d1d5db" : "#374151"; // Cinza claro no escuro, cinza escuro no claro
-  const gridColor = isDarkMode ? "#4b5563" : "#e5e7eb"; // Grid mais escura no modo escuro
-  const lineColor = isDarkMode ? "#60a5fa" : "#2563eb"; // Azul claro no escuro, azul forte no claro
-  const tooltipBg = isDarkMode ? "#1f2937" : "#ffffff"; // Tooltip escuro no modo dark, branco no light
-  const tooltipText = isDarkMode ? "#f9fafb" : "#000000"; // Texto branco no dark, preto no light
+  const axisColor = isDarkMode ? "#d1d5db" : "#374151";
+  const gridColor = isDarkMode ? "#4b5563" : "#e5e7eb";
+  const lineColor = isDarkMode ? "#60a5fa" : "#2563eb";
+  const tooltipBg = isDarkMode ? "#1f2937" : "#ffffff";
+  const tooltipText = isDarkMode ? "#f9fafb" : "#000000";
 
   return (
     <div className="max-w-5xl mx-auto p-6">
       <h1 className="text-2xl font-semibold mb-6 text-center">Histórico de Manutenções</h1>
 
-      {/* Seleção de veículo */}
       <div className="mb-6 flex justify-center">
         <Select onValueChange={(value) => setSelectedVehicle(Number(value))}>
           <SelectTrigger className="w-64">
@@ -91,7 +90,6 @@ export function Maintenance() {
         </Select>
       </div>
 
-      {/* Exibição das manutenções */}
       {selectedVehicle && (
         <>
           {filteredMaintenances.length === 0 ? (
@@ -118,7 +116,6 @@ export function Maintenance() {
             </div>
           )}
 
-          {/* Gráfico de Evolução da Quilometragem */}
           <div className="mt-8">
             <h2 className="text-lg font-semibold mb-3">Evolução da Quilometragem</h2>
             <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-md">

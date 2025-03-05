@@ -43,12 +43,11 @@ export function Home() {
   }, []);
 
   const totalVehicles = vehicles.length;
-  const pendingMaintenances = maintenances.filter(m => m.status === "Pendente" || m.status === "Próximo a vencer");
-  const lastMaintenance = maintenances.find(m => m.status === "Concluído");
+  const pendingMaintenances = maintenances.filter(maintenance => maintenance.status === "Pendente" || maintenance.status === "Próximo a vencer");
+  const lastMaintenance = maintenances.find(maintenance => maintenance.status === "Concluído");
 
-  const mileageData = vehicles.map(v => ({ name: v.name, mileage: v.mileage }));
+  const mileageData = vehicles.map(vehicle => ({ name: vehicle.name, mileage: vehicle.mileage }));
 
-  // Definir cores para o gráfico conforme o tema
   const isDarkMode = theme === "dark";
   const axisColor = isDarkMode ? "#d1d5db" : "#374151";
   const gridColor = isDarkMode ? "#4b5563" : "#e5e7eb";
@@ -57,7 +56,6 @@ export function Home() {
   return (
     <div className="flex flex-col min-h-screen">
 
-      {/* Cards de Resumo */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card>
           <CardHeader><CardTitle>Veículos Cadastrados</CardTitle></CardHeader>
@@ -89,9 +87,7 @@ export function Home() {
         </Card>
       </div>
 
-      {/* Gráficos */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-        {/* Gráfico de Quilometragem */}
         <Card className="p-4">
           <CardHeader><CardTitle>Quilometragem dos Veículos</CardTitle></CardHeader>
           <CardContent>
@@ -107,12 +103,11 @@ export function Home() {
           </CardContent>
         </Card>
 
-        {/* Gráfico de Gastos */}
         <Card className="p-4">
           <CardHeader><CardTitle>Gastos com Manutenção</CardTitle></CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={maintenances.map(m => ({ date: m.date, cost: parseFloat(m.cost.replace("R$", "").replace(",", ".")) }))}>
+              <LineChart data={maintenances.map(maintenance => ({ date: maintenance.date, cost: parseFloat(maintenance.cost.replace("R$", "").replace(",", ".")) }))}>
                 <CartesianGrid stroke={gridColor} />
                 <XAxis dataKey="date" stroke={axisColor} />
                 <YAxis stroke={axisColor} />

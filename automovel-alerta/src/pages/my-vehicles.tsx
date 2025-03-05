@@ -14,7 +14,6 @@ export function MyVehicles() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
 
   useEffect(() => {
-    // Simulação de busca dos veículos do usuário (substituir por API futuramente)
     setVehicles([
       { id: 1, name: "Meu Peugeot", model: "Peugeot 208 Style 2024", plate: "ABC-1234", mileage: "32.500 km" },
       { id: 2, name: "SUV Família", model: "Jeep Compass 2023", plate: "XYZ-9876", mileage: "45.200 km" },
