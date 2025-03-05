@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "host": "vite --host",
-    "deploy": "gh-pages -d build"
+    "deploy": "vite build && gh-pages -d build"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.6",
