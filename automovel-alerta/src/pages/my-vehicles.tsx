@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";
+import { Plus } from "lucide-react"
 
 interface Vehicle {
   id: number;
@@ -38,8 +39,14 @@ export function MyVehicles() {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-semibold mb-4">Meus Veículos</h1>
-
+      {/* Container do título e botão alinhados */}
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-semibold">Meus Veículos</h1>
+        <Button variant={"default"}>
+          Cadastrar Veículo <Plus />
+        </Button>
+      </div>
+  
       {vehicles.length === 0 ? (
         <p className="text-gray-500">Nenhum veículo cadastrado.</p>
       ) : (
@@ -130,4 +137,5 @@ export function MyVehicles() {
       )}
     </div>
   );
+  
 };
