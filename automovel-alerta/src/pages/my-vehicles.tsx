@@ -16,6 +16,7 @@ interface Vehicle {
 export function MyVehicles() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const [editingVehicle, setEditingVehicle] = useState<Vehicle | null>(null);
+  const [addingVehicle, setAddingVehicle] = useState<Vehicle | null>(null);
 
   useEffect(() => {
     setVehicles([
@@ -26,6 +27,10 @@ export function MyVehicles() {
 
   const handleEditVehicle = (vehicle: Vehicle) => {
     setEditingVehicle(vehicle);
+  };
+
+  const handleAddVehicle = () => {
+    setAddingVehicle(vehicle);
   };
 
   const handleSaveChanges = () => {
@@ -39,14 +44,69 @@ export function MyVehicles() {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      {/* Container do título e botão alinhados */}
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-semibold">Meus Veículos</h1>
-        <Button variant={"default"}>
-          Cadastrar Veículo <Plus />
-        </Button>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button variant={"default"} onClick={() => handleAddVehicle()}>
+              Cadastrar Veículo <Plus />
+            </Button>
+          </AlertDialogTrigger>
+          {addingVehicle && (
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle className="flex justify-between">
+                  Adicionar Veículo
+                  <AlertDialogCancel onClick={() => setAddingVehicle(null)}>X</AlertDialogCancel>
+                </AlertDialogTitle>
+                <AlertDialogDescription className="space-y-2">
+                  <div>
+                    <label className="text-gray-600">Nome do carro:</label>
+                    <Input
+                      className="mt-1"
+                      type="text"
+                      value={addingVehicle.name}
+                      onChange={(e) => setAddingVehicle({ ...addingVehicle, name: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-gray-600">Marca e Modelo:</label>
+                    <Input
+                      className="mt-1"
+                      type="text"
+                      value={addingVehicle.model}
+                      onChange={(e) => setAddingVehicle({ ...addingVehicle, model: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-gray-600">Placa:</label>
+                    <Input
+                      className="mt-1"
+                      type="text"
+                      value={addingVehicle.plate}
+                      onChange={(e) => setAddingVehicle({ ...addingVehicle, plate: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-gray-600">Quilometragem:</label>
+                    <Input
+                      className="mt-1"
+                      type="text"
+                      value={addingVehicle.mileage}
+                      onChange={(e) => setAddingVehicle({ ...addingVehicle, mileage: e.target.value })}
+                    />
+                  </div>
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel onClick={() => setAddingVehicle(null)}>Cancelar</AlertDialogCancel>
+                <AlertDialogAction onClick={handleSaveChanges}>Salvar</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          )}
+        </AlertDialog>
       </div>
-  
+
       {vehicles.length === 0 ? (
         <p className="text-gray-500">Nenhum veículo cadastrado.</p>
       ) : (
@@ -137,5 +197,5 @@ export function MyVehicles() {
       )}
     </div>
   );
-  
+
 };
