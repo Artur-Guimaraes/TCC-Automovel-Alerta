@@ -16,6 +16,7 @@ interface Vehicle {
 export function MyVehicles() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const [editingVehicle, setEditingVehicle] = useState<Vehicle | null>(null);
+  const [deletingVehicle, setDeletingVehicle] = useState<Vehicle | null>(null);
   const [addingVehicle, setAddingVehicle] = useState<Vehicle | null>(null);
 
   useEffect(() => {
@@ -29,8 +30,22 @@ export function MyVehicles() {
     setEditingVehicle(vehicle);
   };
 
+  const handleDeleteVehicle = (vehicle: Vehicle) => {
+      setDeletingVehicle(vehicle);
+  };
+
+  const confirmDeleteVehicle = () => {
+    if (deletingVehicle) {
+      setVehicles((prev) => {
+        const updatedVehicles = prev.filter((vehicle) => vehicle.id !== deletingVehicle.id);
+        return updatedVehicles.map((vehicle, index) => ({ ...vehicle, id: index + 1 }));
+      });
+      setDeletingVehicle(null);
+    }
+  };
+
   const handleAddVehicle = () => {
-    setAddingVehicle(vehicle);
+    setAddingVehicle({ id: vehicles.length + 1, name: "", model: "", plate: "", mileage: "" });
   };
 
   const handleSaveChanges = () => {
@@ -38,9 +53,14 @@ export function MyVehicles() {
       setVehicles((prev) =>
         prev.map((vehicle) => (vehicle.id === editingVehicle.id ? editingVehicle : vehicle))
       );
+      setEditingVehicle(null);
+    } else if (addingVehicle) {
+      setVehicles((prev) => [...prev, addingVehicle]);
+      setAddingVehicle(null);
     }
-    setEditingVehicle(null);
   };
+
+  useEffect(() => {}, [vehicles]);
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -188,7 +208,24 @@ export function MyVehicles() {
                       </AlertDialogContent>
                     )}
                   </AlertDialog>
-                  <Button variant="destructive" size="sm">Excluir</Button>
+                  <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button variant="destructive" size="sm" onClick={() => handleDeleteVehicle(vehicle)}>Excluir</Button>
+                      </AlertDialogTrigger>
+                    {deletingVehicle && (
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                            <AlertDialogTitle className="flex justify-between pb-7">
+                              Tem certeza que deseja excluir o veículo?
+                            </AlertDialogTitle>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel onClick={() => setDeletingVehicle(null)}>Cancelar</AlertDialogCancel>
+                              <AlertDialogAction onClick={confirmDeleteVehicle}>Excluir</AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogHeader>
+                      </AlertDialogContent>
+                    )}
+                  </AlertDialog>
                 </div>
               </CardContent>
             </Card>
